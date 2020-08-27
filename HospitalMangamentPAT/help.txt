@@ -1,0 +1,27 @@
+Login Screen:
+Enter you login details and click on the login button. if you are a new user please click on "Register" else If you 
+have forgotten your password select "Forgot password". You have several ways to login, the first is with your username 
+and passowrd, the second is with a username and Doctor's password that is connected to the affermentioned user, 
+thirdly you can login using only a username or id no. only. N.B. Each of these give decreascing levels of authority and information.:
+
+Register Screen:
+Enter a lisername and password to continue, please make sure your username is between 3-15 characters and that your 
+password is a minimum of 8 and includes 1 number, 1 capital letter and 1 symbol. Please Make sure you copy the 
+Recovery code that will appear aft, you sucessfully register.:
+
+Forgot Password Screen:
+Please enter your recovery code that was given to you at registration. If you have lost it please send an email to 
+supportPSANND.co.ca:
+
+Stain Screen:
+Here you will see all of your relevant information depending on how you logged in. Not seeing what you normally do, 
+Lag out and log back in makign sure you use your username and passord and not just your ID number/username:
+
+Edit Screen:
+here you can edit your data that is displayed on the wain screen. When you have typed in all the relevant data please 
+make sure to click on Confirm edit which will take you back to the main page. Certain information cannot be editied, 
+such as your username and certain medical information, to change this please contact an admin at Suppork@SADM).co.za:
+
+Admissions Screen:
+Here you can see all the previous admissions for the user currently logged in, aswell as the hospital name, ward, admittance and discharge date.
+
