@@ -5,6 +5,7 @@
  */
 package MB;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -343,7 +344,12 @@ public class EditGUI extends javax.swing.JFrame {
         AllergensTxt.setText(sc.next());
         CellNoTxt.setText(sc.next());
         HomeNoTxt.setText(sc.next());
+        try{
         TrustedDocTxt.setText(sc.next());
+        }
+        catch(NoSuchElementException ex){
+            TrustedDocTxt.setText("");
+        }
     }
 
     /**
