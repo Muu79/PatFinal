@@ -175,6 +175,7 @@ public class PatientManager {
         switch (auth) {
             case 1:
                 try {
+                    System.out.println("Found it");
                     rs = db.queryTbl("SELECT tblPatientHealth.PatUsername, tblPatientsPersonalInfo.PatUsername, tblPatientsPersonalInfo.FName, tblPatientsPersonalInfo.SName, tblPatientHealth.BloodType, tblPatientHealth.Allergens\n"
                             + "FROM tblPatientsPersonalInfo INNER JOIN tblPatientHealth ON tblPatientsPersonalInfo.PatUsername = tblPatientHealth.PatUsername\n"
                             + "Where tblPatientHealth.PatUsername = '" + username + "' ; ");
@@ -243,13 +244,14 @@ public class PatientManager {
             case 4:
                 try {
 
-                    rs = db.queryTbl(String.format("SELECT tblDocAndPatients.PatientUsername, tblPatientHealth.PatUsername, tblPatientHealth.Allergens, tblPatientHealth.BloodType, tblPatientsPersonalInfo.SName, tblPatientsPersonalInfo.FName, tblPatientsPersonalInfo.CellNo, tblHospitals.HospitalName, tblHospitals.TelNo, tblJobs.JobDesc, tblDoctors.DoctorUsername\n"
-                            + "FROM tblPatientsPersonalInfo INNER JOIN ((tblPatientHealth INNER JOIN (tblHospitals INNER JOIN tblAdmissions ON tblHospitals.HosID = tblAdmissions.HosID) ON tblPatientHealth.PatUsername = tblAdmissions.PatientUsername) INNER JOIN (tblJobs INNER JOIN (tblDoctors INNER JOIN tblDocAndPatients ON tblDoctors.DoctorUsername = tblDocAndPatients.DocUsername) ON tblJobs.JobID = tblDoctors.JobID) ON tblPatientHealth.PatUsername = tblDocAndPatients.PatientUsername) ON tblPatientsPersonalInfo.PatUsername = tblPatientHealth.PatUsername\n"
-                            + " WHERE tblPatientHealth.PatUsername='%s' AND tblDoctors.regHosID=[tblHospitals].[HosID];", username.trim()));
+                    rs = db.queryTbl("SELECT tblPatientHealth.PatUsername, tblPatientsPersonalInfo.FName, tblPatientsPersonalInfo.SName, tblPatientHealth.BloodType, tblPatientHealth.Allergens, tblPatientsPersonalInfo.CellNo, tblHospitals.HospitalName, tblHospitals.TelNo, tblJobs.JobDesc, tblDoctors.DoctorUsername\n" +
+"FROM tblPatientsPersonalInfo INNER JOIN ((tblJobs INNER JOIN (tblHospitals INNER JOIN (tblDoctors INNER JOIN tblDocAndPatients ON tblDoctors.DoctorUsername = tblDocAndPatients.DocUsername) ON tblHospitals.HosID = tblDoctors.RegHosID) ON tblJobs.JobID = tblDoctors.JobID) INNER JOIN tblPatientHealth ON (tblPatientHealth.PatUsername = tblDocAndPatients.PatientUsername) AND (tblDoctors.DoctorUsername = tblPatientHealth.TrustedDoc)) ON tblPatientsPersonalInfo.PatUsername = tblPatientHealth.PatUsername"
+                            + " WHERE PatUsername = 'Muu79'");
                     if (rs.next()) {
-                        temp += rs.getString("PatientUsername") + ";" + rs.getString("Fname") + " " + rs.getString("Sname") + ";"
+                        temp += rs.getString("PatUsername") + ";" + rs.getString("Fname") + " " + rs.getString("Sname") + ";"
                                 + rs.getString("BloodType") + ";" + rs.getString("Allergens") + ";" + rs.getString("CellNo") + ";" + rs.getString("HospitalName") + ";"
                                 + rs.getString("TelNo") + ";" + rs.getString("JobDesc") + ";" + rs.getString("DoctorUsername") + " ";
+                        System.out.println("Yes?");
                     } else {
                         ResultSet nrs = db.queryTbl(String.format("SELECT tblPatientsPersonalInfo.PatUsername, tblPatientsPersonalInfo.FName, tblPatientsPersonalInfo.Sname, tblPatientHealth.BloodType, tblPatientHealth.Allergens, tblPatientsPersonalInfo.CellNo\n"
                                 + "FROM tblPatientsPersonalInfo INNER JOIN tblPatientHealth ON tblPatientsPersonalInfo.PatUsername = tblPatientHealth.PatUsername"

@@ -353,7 +353,7 @@ public class LoginGui extends javax.swing.JFrame {
 
                     case 3: {
                         MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
-                        System.out.println("321");
+                        System.out.println("322");
                         msc.setVisible(true);
                         this.dispose();
                         break;
