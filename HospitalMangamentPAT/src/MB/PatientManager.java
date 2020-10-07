@@ -245,8 +245,8 @@ public class PatientManager {
                 try {
 
                     rs = db.queryTbl("SELECT tblPatientHealth.PatUsername, tblPatientsPersonalInfo.FName, tblPatientsPersonalInfo.SName, tblPatientHealth.BloodType, tblPatientHealth.Allergens, tblPatientsPersonalInfo.CellNo, tblHospitals.HospitalName, tblHospitals.TelNo, tblJobs.JobDesc, tblDoctors.DoctorUsername\n" +
-"FROM tblPatientsPersonalInfo INNER JOIN ((tblJobs INNER JOIN (tblHospitals INNER JOIN (tblDoctors INNER JOIN tblDocAndPatients ON tblDoctors.DoctorUsername = tblDocAndPatients.DocUsername) ON tblHospitals.HosID = tblDoctors.RegHosID) ON tblJobs.JobID = tblDoctors.JobID) INNER JOIN tblPatientHealth ON (tblPatientHealth.PatUsername = tblDocAndPatients.PatientUsername) AND (tblDoctors.DoctorUsername = tblPatientHealth.TrustedDoc)) ON tblPatientsPersonalInfo.PatUsername = tblPatientHealth.PatUsername"
-                            + " WHERE PatUsername = 'Muu79'");
+"FROM tblPatientsPersonalInfo INNER JOIN ((tblJobs INNER JOIN (tblHospitals INNER JOIN (tblDoctors INNER JOIN tblDocAndPatients ON tblDoctors.DoctorUsername = tblDocAndPatients.DocUsername) ON tblHospitals.HosID = tblDoctors.RegHosID) ON tblJobs.JobID = tblDoctors.JobID) INNER JOIN tblPatientHealth ON (tblPatientHealth.PatUsername = tblDocAndPatients.PatientUsername) AND (tblDoctors.DoctorUsername = tblPatientHealth.TrustedDoc)) ON tblPatientsPersonalInfo.PatUsername = tblPatientHealth.PatUsername" +
+                            " WHERE tblPatientHealth.PatUsername = '"+ username + "'");
                     if (rs.next()) {
                         temp += rs.getString("PatUsername") + ";" + rs.getString("Fname") + " " + rs.getString("Sname") + ";"
                                 + rs.getString("BloodType") + ";" + rs.getString("Allergens") + ";" + rs.getString("CellNo") + ";" + rs.getString("HospitalName") + ";"
