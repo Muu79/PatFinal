@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -235,29 +236,33 @@ public class EditGUI extends javax.swing.JFrame {
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         String temp = "";
-        
+
         boolean flag = true;
         PatientManager pm = new PatientManager(username);
-        MasterValidator vm = new MasterValidator();
-        if (vm.isStringEmpty(FullNameTxt.getText()) || vm.isStringEmpty(IDNoTxt.getText()) || vm.isStringEmpty(BloodTypeTxt.getText())) {
-            errTxt.setText("Please make sure all required fields are filled in");
+        MasterValidator mv = new MasterValidator();
+        if (mv.isStringEmpty(FullNameTxt.getText()) || mv.isStringEmpty(IDNoTxt.getText()) || mv.isStringEmpty(BloodTypeTxt.getText())) {
+            errTxt.setText("Please make sure all required fields are filled in\n");
         } else {
-            if (vm.isStringTooLong(BloodTypeTxt.getText().trim(), 3)) {
-                temp += "Please make sure Blood type is no more than 3 chraracters,";
+            if (mv.isStringTooLong(BloodTypeTxt.getText().trim(), 3)) {
+                temp += "Please make sure Blood type is no more than 3 chraracters\n";
                 flag = false;
             }
-            if ((CellNoTxt.getText().trim().length() != 10 && !vm.isStringEmpty(CellNoTxt.getText())) || (HomeNoTxt.getText().trim().length() != 10 && !vm.isStringEmpty(HomeNoTxt.getText()))) {
-                temp += "Please check Cellphone and Tell No. length,";
+            if ((CellNoTxt.getText().trim().length() != 10 && !mv.isStringEmpty(CellNoTxt.getText())) || (HomeNoTxt.getText().trim().length() != 10 && !mv.isStringEmpty(HomeNoTxt.getText()))) {
+                temp += "Please check Cellphone and Tell No. length\n";
                 flag = false;
             }
-            if (IDNoTxt.getText().trim().length() != 13 && !vm.isStringEmpty(IDNoTxt.getText())) {
-                temp += "Please Check ID. No.,";
+            if (IDNoTxt.getText().trim().length() != 13 && !mv.isStringEmpty(IDNoTxt.getText())) {
+                temp += "Please Check ID. No.\n";
                 flag = false;
             }
 //            if (!vm.isStringEmpty(TrustedDocTxt.getText()) && vm.isStringTooShort(TrustedDocTxt.getText(), 8)) {
 //                temp += "Please make sure Doc Username is gretaer than 8";
 //                flag = false;
 //            }
+            if (!mv.cBlTy(BloodTypeTxt.getText())) {
+                temp += "Please Check that the blood type is correct\n";
+                flag = false;
+            }
             if (flag) {
                 String update = "";
                 update += IDNoTxt.getText().trim() + ";";
@@ -267,10 +272,9 @@ public class EditGUI extends javax.swing.JFrame {
                 update += HomeNoTxt.getText().trim() + ";";
                 update += AllergensTxt.getText().trim() + ";";
                 update += BloodTypeTxt.getText().trim() + ";";
-                update += TrustedDocTxt.getText().trim() + " " ;
+                update += TrustedDocTxt.getText().trim() + " ";
                 System.out.println(update);
                 pm.SaveChanges(update);
-                
 
                 switch (auth) {
                     case 0: {
@@ -293,11 +297,13 @@ public class EditGUI extends javax.swing.JFrame {
                     }
                 }
 
+            } else {
+                JOptionPane.showMessageDialog(null, temp);
             }
         }
-        errTxt.setText(temp);
+
         title.setText("Edit Info For " + username);
-        
+
         this.prepScreen(pm.getKnown(username));
 
     }//GEN-LAST:event_SaveBtnActionPerformed
@@ -308,31 +314,27 @@ public class EditGUI extends javax.swing.JFrame {
         hs.setFocusable(true);
     }//GEN-LAST:event_btnHelpActionPerformed
 
-    
-    
+
     private void CloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseBtnActionPerformed
         switch (auth) {
-            case 0:
-                {
-                    MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
-                    msc.setVisible(true);
-                    this.dispose();
-                    break;
-                }
-            case 1:
-                {
-                    MainScreenGUI3 msc = new MainScreenGUI3(username, 4);
-                    msc.setVisible(true);
-                    this.dispose();
-                    break;
-                }
-            default:
-                {
-                    MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
-                    msc.setVisible(true);
-                    this.dispose();
-                    break;
-                }
+            case 0: {
+                MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
+                msc.setVisible(true);
+                this.dispose();
+                break;
+            }
+            case 1: {
+                MainScreenGUI3 msc = new MainScreenGUI3(username, 4);
+                msc.setVisible(true);
+                this.dispose();
+                break;
+            }
+            default: {
+                MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
+                msc.setVisible(true);
+                this.dispose();
+                break;
+            }
         }
     }//GEN-LAST:event_CloseBtnActionPerformed
 
@@ -344,10 +346,9 @@ public class EditGUI extends javax.swing.JFrame {
         AllergensTxt.setText(sc.next());
         CellNoTxt.setText(sc.next());
         HomeNoTxt.setText(sc.next());
-        try{
-        TrustedDocTxt.setText(sc.next());
-        }
-        catch(NoSuchElementException ex){
+        try {
+            TrustedDocTxt.setText(sc.next());
+        } catch (NoSuchElementException ex) {
             TrustedDocTxt.setText("");
         }
     }

@@ -5,7 +5,7 @@ and passowrd, the second is with a username and Doctor's password that is connec
 thirdly you can login using only a username or id no. only. N.B. Each of these give decreascing levels of authority and information.:
 
 Register Screen:
-Enter a lisername and password to continue, please make sure your username is between 3-15 characters and that your 
+Enter a Username and password to continue, please make sure your username is between 3-15 characters and that your 
 password is a minimum of 8 and includes 1 number, 1 capital letter and 1 symbol. Please Make sure you copy the 
 Recovery code that will appear aft, you sucessfully register.:
 

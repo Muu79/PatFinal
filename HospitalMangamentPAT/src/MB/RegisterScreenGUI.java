@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -237,13 +238,13 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
         Hasher h = new Hasher();
         MasterValidator mv = new MasterValidator();
         if (passTxt.getText().isEmpty() || passConTxt.getText().isEmpty() || userTxt.getText().isEmpty()) {
-            temp += "Make Sure all fields are filled in,";
+            temp += "Make Sure all fields are filled in\n";
         }
         if (!(passTxt.getText().equals(passConTxt))) {
-            temp += "Passwords must match,";
+            temp += "Passwords must match\n";
         }
         if (mv.isStringTooShort(passTxt.getText(), 8)) {
-            temp += "Passord is too short,";
+            temp += "Passord is too short\n";
         }
         if (mv.isStringTooShort(userTxt.getText(), 8) || mv.isStringTooLong(userTxt.getText(), 15)) {
             temp += "Username must be between 8-15 chracters";
@@ -256,7 +257,7 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
                         + h.toHexString(h.getSHA(passTxt.getText())) + "', '" + h.toHexString(h.getSHA(regCode)) + "');");
                 pm.updateTbl("INSERT INTO tblPatientHealth (PatUsername) VALUES('" + username + "');");
                 recCode.setVisible(true);
-                recCode.setSize(500,400);
+                recCode.setSize(500, 400);
                 recCodeText.setText(regCode);
             } catch (SQLException ex) {
                 System.out.println("Error with Insert Statment");
@@ -270,7 +271,9 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
             passConTxt.setText("");
 
         }
-        errTxt.setText(temp);
+        if (!temp.isEmpty()) {
+            JOptionPane.showMessageDialog(null, temp);
+        }
     }//GEN-LAST:event_registerbtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

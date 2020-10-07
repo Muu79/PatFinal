@@ -26,12 +26,14 @@ public class AdmissionsUI extends javax.swing.JFrame {
         String temp = "";
         PatientManager pm = new PatientManager(user);
         Scanner sc = new Scanner(pm.getAdmissions(user));
+        System.out.println(pm.getAdmissions(user));
         jLabel1.setText("Admissions for " + user);
         while(sc.hasNextLine()){
             Scanner scLine = new Scanner(sc.nextLine()).useDelimiter(";");
             temp += "Username: " + scLine.next() + "\tWard: " + scLine.next() + "\tDate In: " + scLine.next().substring(0, 9)
                     + "\tDate Out:" + scLine.next().substring(0, 9) + "\tHospital Name: " + scLine.next() + "\n";
         }
+        outTxt.setText(temp);
     }
 
     /**
