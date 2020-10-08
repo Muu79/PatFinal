@@ -27,6 +27,33 @@ public class PatientManager {
         username = user;
     }
     DBConnect db = new DBConnect();
+    
+    public String getHos(){
+        String temp = "";
+        try {
+            ResultSet rs = db.queryTbl("SELECT * FROM tblHospitals");
+            while(rs.next()){
+                temp += rs.getString("HosID") + "\t" + rs.getString("HospitalName") + "\n";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return temp;
+    }
+    
+    public int getAdLast(){
+        int i = 0;
+        try {
+            ResultSet rs = db.queryTbl("SELECT * FROM tblAdmissions");
+            while(rs.next()){
+                i = rs.getInt(0);
+            }
+            return i;
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, null, ex);
+            return i;
+        }
+    }
 
     public String getPatientTbl(String sql) {
         String temp = "";

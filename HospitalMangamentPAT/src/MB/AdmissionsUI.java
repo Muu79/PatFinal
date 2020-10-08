@@ -21,7 +21,10 @@ public class AdmissionsUI extends javax.swing.JFrame {
         initComponents();
     }
     
+    private String username;
+    
     public AdmissionsUI(String user){
+        this.username = user;
         initComponents();
         String temp = "";
         PatientManager pm = new PatientManager(user);
@@ -155,7 +158,8 @@ public class AdmissionsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHelpActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        AddAdmission aa = new AddAdmission(this.username);
+        aa.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
