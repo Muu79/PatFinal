@@ -276,6 +276,8 @@ public class EditGUI extends javax.swing.JFrame {
                 pm.SaveChanges(update);
                 if (reg) {
                     AddAdmission aa = new AddAdmission();
+                    aa.setVisible(reg);
+                    this.dispose();
                 }else{
                     switch (auth) {
                         case 0: {
