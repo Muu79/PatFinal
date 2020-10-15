@@ -21,21 +21,23 @@ public class AddAdmission extends javax.swing.JFrame {
      */
     public AddAdmission() {
         initComponents();
-        
+
     }
-    
-    public AddAdmission(String user){
+
+    public AddAdmission(String user) {
+        initComponents();
         this.user = user;
     }
-    
+
     private String hosList;
-    
+
     private String user;
-    
-    private void hosRef(){
+
+    private void hosRef() {
         PatientManager pm = new PatientManager(user);
-        this.HosRefDialog.setVisible(true);
-        this.hosTxtArea.setText(pm.getHos());
+        HosRefDialog.setSize(500, 250);
+        HosRefDialog.setVisible(true);
+        hosTxtArea.setText(pm.getHos());
     }
 
     /**
@@ -64,6 +66,7 @@ public class AddAdmission extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         AddBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         hosTxtArea.setColumns(20);
         hosTxtArea.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -98,37 +101,50 @@ public class AddAdmission extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(30, 30, 30));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
+        jPanel1.setLayout(null);
 
         WardTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 WardTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(WardTxt);
+        WardTxt.setBounds(182, 96, 100, 25);
 
         DateInTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DateInTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(DateInTxt);
+        DateInTxt.setBounds(182, 130, 100, 25);
 
         DateOutTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DateOutTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(DateOutTxt);
+        DateOutTxt.setBounds(303, 130, 100, 25);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Add An Admission:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 11, 189, 30);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("/");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(292, 127, 7, 25);
 
         HosIdChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", " " }));
+        jPanel1.add(HosIdChoice);
+        HosIdChoice.setBounds(182, 68, 31, 20);
 
         HopitalRef.setBackground(new java.awt.Color(255, 255, 255));
         HopitalRef.setText("Hospital ID Refrence");
@@ -137,15 +153,23 @@ public class AddAdmission extends javax.swing.JFrame {
                 HopitalRefActionPerformed(evt);
             }
         });
+        jPanel1.add(HopitalRef);
+        HopitalRef.setBounds(223, 67, 131, 23);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Hospital ID");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(23, 71, 52, 14);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ward");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(23, 101, 26, 14);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Date In/Date Out");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(23, 135, 84, 14);
 
         AddBtn.setText("Add");
         AddBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -153,78 +177,32 @@ public class AddAdmission extends javax.swing.JFrame {
                 AddBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(AddBtn);
+        AddBtn.setBounds(182, 166, 79, 23);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("(YYYY/MM/DD)");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(407, 135, 70, 14);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(75, 75, 75)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WardTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(HosIdChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(HopitalRef))
-                            .addComponent(AddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(DateInTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateOutTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)))))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(HosIdChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HopitalRef)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(WardTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DateInTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateOutTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(AddBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(270, 166, 80, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -247,27 +225,31 @@ public class AddAdmission extends javax.swing.JFrame {
     }//GEN-LAST:event_HopitalRefActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
-        this.HopitalRef.setVisible(false);
+        HosRefDialog.setVisible(false);
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         MasterValidator mv = new MasterValidator();
-        int hosID = (int) HosIdChoice.getSelectedItem();
+        int hosID = Integer.parseInt((String)HosIdChoice.getSelectedItem());
         String ward = WardTxt.getText();
         String dIn = DateInTxt.getText();
         String dOut = DateOutTxt.getText();
-        if(mv.dateCheck(dIn, dOut)){
+        if (mv.dateCheck(dIn, dOut)) {
             PatientManager pm = new PatientManager(this.user);
             try {
-                pm.updateTbl(String.format("INSERT INTO tblAdmissions VALUES(%s,%s,%s,%s,%s,%s)", pm.getAdLast(),this.user,ward,dIn,dOut,hosID));
+                pm.updateTbl(String.format("INSERT INTO tblAdmissions (AdmissionID, PatientUser, Ward, DateIn, DateOut) VALUES(%s,'%s','%s',#%s#,#%s#,%s)", pm.getAdLast(), this.user, ward, dIn, dOut, hosID));
             } catch (SQLException ex) {
                 System.out.println(ex);
                 Logger.getLogger(AddAdmission.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Please make sure the date is entered correctly adn in the right format");
+        } else {
+            JOptionPane.showMessageDialog(null, "Please make sure the date is entered correctly and in the right format");
         }
     }//GEN-LAST:event_AddBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +296,7 @@ public class AddAdmission extends javax.swing.JFrame {
     private javax.swing.JTextField WardTxt;
     private javax.swing.JButton closeBtn;
     private javax.swing.JTextArea hosTxtArea;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

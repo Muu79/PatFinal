@@ -46,7 +46,7 @@ public class PatientManager {
         try {
             ResultSet rs = db.queryTbl("SELECT * FROM tblAdmissions");
             while(rs.next()){
-                i = rs.getInt(0);
+                i = rs.getInt("AdmissionID");
             }
             return i;
         } catch (SQLException ex) {
