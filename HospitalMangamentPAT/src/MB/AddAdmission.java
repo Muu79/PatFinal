@@ -29,9 +29,18 @@ public class AddAdmission extends javax.swing.JFrame {
         this.user = user;
     }
 
+    public AddAdmission(String user, boolean flag) {
+        initComponents();
+        this.user = user;
+        this.reg = flag;
+        this.ExitBtn.setVisible(false);
+    }
+
     private String hosList;
 
     private String user;
+
+    private boolean reg;
 
     private void hosRef() {
         PatientManager pm = new PatientManager(user);
@@ -66,7 +75,7 @@ public class AddAdmission extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         AddBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        ExitBtn = new javax.swing.JButton();
 
         hosTxtArea.setColumns(20);
         hosTxtArea.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -144,7 +153,7 @@ public class AddAdmission extends javax.swing.JFrame {
 
         HosIdChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", " " }));
         jPanel1.add(HosIdChoice);
-        HosIdChoice.setBounds(182, 68, 31, 20);
+        HosIdChoice.setBounds(182, 68, 37, 26);
 
         HopitalRef.setBackground(new java.awt.Color(255, 255, 255));
         HopitalRef.setText("Hospital ID Refrence");
@@ -154,22 +163,22 @@ public class AddAdmission extends javax.swing.JFrame {
             }
         });
         jPanel1.add(HopitalRef);
-        HopitalRef.setBounds(223, 67, 131, 23);
+        HopitalRef.setBounds(223, 67, 145, 32);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Hospital ID");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(23, 71, 52, 14);
+        jLabel3.setBounds(23, 71, 60, 16);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ward");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(23, 101, 26, 14);
+        jLabel4.setBounds(23, 101, 31, 16);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Date In/Date Out");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(23, 135, 84, 14);
+        jLabel5.setBounds(23, 135, 91, 16);
 
         AddBtn.setText("Add");
         AddBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -178,21 +187,21 @@ public class AddAdmission extends javax.swing.JFrame {
             }
         });
         jPanel1.add(AddBtn);
-        AddBtn.setBounds(182, 166, 79, 23);
+        AddBtn.setBounds(182, 166, 79, 32);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("(YYYY/MM/DD)");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(407, 135, 70, 14);
+        jLabel6.setBounds(407, 135, 78, 16);
 
-        jButton1.setText("Exit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ExitBtn.setText("Exit");
+        ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ExitBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(270, 166, 80, 23);
+        jPanel1.add(ExitBtn);
+        ExitBtn.setBounds(270, 166, 80, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,7 +239,7 @@ public class AddAdmission extends javax.swing.JFrame {
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         MasterValidator mv = new MasterValidator();
-        int hosID = Integer.parseInt((String)HosIdChoice.getSelectedItem());
+        int hosID = Integer.parseInt((String) HosIdChoice.getSelectedItem());
         String ward = WardTxt.getText();
         String dIn = DateInTxt.getText();
         String dOut = DateOutTxt.getText();
@@ -238,6 +247,11 @@ public class AddAdmission extends javax.swing.JFrame {
             PatientManager pm = new PatientManager(this.user);
             try {
                 pm.updateTbl(String.format("INSERT INTO tblAdmissions (AdmissionID, PatientUser, Ward, DateIn, DateOut) VALUES(%s,'%s','%s',#%s#,#%s#,%s)", pm.getAdLast(), this.user, ward, dIn, dOut, hosID));
+                if (this.reg) {
+                    MainScreenGUI3 ms = new MainScreenGUI3(this.user, 4);
+                    ms.setVisible(true);
+                    this.dispose();
+                }
             } catch (SQLException ex) {
                 System.out.println(ex);
                 Logger.getLogger(AddAdmission.class.getName()).log(Level.SEVERE, null, ex);
@@ -245,11 +259,12 @@ public class AddAdmission extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Please make sure the date is entered correctly and in the right format");
         }
+
     }//GEN-LAST:event_AddBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ExitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitBtnActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ExitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,13 +305,13 @@ public class AddAdmission extends javax.swing.JFrame {
     private javax.swing.JButton AddBtn;
     private javax.swing.JTextField DateInTxt;
     private javax.swing.JTextField DateOutTxt;
+    private javax.swing.JButton ExitBtn;
     private javax.swing.JButton HopitalRef;
     private javax.swing.JComboBox<String> HosIdChoice;
     private javax.swing.JDialog HosRefDialog;
     private javax.swing.JTextField WardTxt;
     private javax.swing.JButton closeBtn;
     private javax.swing.JTextArea hosTxtArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

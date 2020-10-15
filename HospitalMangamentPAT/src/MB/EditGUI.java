@@ -19,6 +19,7 @@ public class EditGUI extends javax.swing.JFrame {
 
     private int auth = 3;
     private String username;
+    private boolean reg = false;
 
     /**
      * Creates new form EditGUI
@@ -31,6 +32,8 @@ public class EditGUI extends javax.swing.JFrame {
         initComponents();
         title.setText("Edit Info For " + usr);
         username = usr;
+        reg = true;
+        this.CloseBtn.setVisible(false);
     }
 
     public EditGUI(String usr, int a) {
@@ -255,10 +258,6 @@ public class EditGUI extends javax.swing.JFrame {
                 temp += "Please Check ID. No.\n";
                 flag = false;
             }
-//            if (!vm.isStringEmpty(TrustedDocTxt.getText()) && vm.isStringTooShort(TrustedDocTxt.getText(), 8)) {
-//                temp += "Please make sure Doc Username is gretaer than 8";
-//                flag = false;
-//            }
             if (!mv.cBlTy(BloodTypeTxt.getText())) {
                 temp += "Please Check that the blood type is correct\n";
                 flag = false;
@@ -275,25 +274,28 @@ public class EditGUI extends javax.swing.JFrame {
                 update += TrustedDocTxt.getText().trim() + " ";
                 System.out.println(update);
                 pm.SaveChanges(update);
-
-                switch (auth) {
-                    case 0: {
-                        MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
-                        msc.setVisible(true);
-                        this.dispose();
-                        break;
-                    }
-                    case 1: {
-                        MainScreenGUI3 msc = new MainScreenGUI3(username, 4);
-                        msc.setVisible(true);
-                        this.dispose();
-                        break;
-                    }
-                    default: {
-                        MainScreenGUI msc = new MainScreenGUI(username, 1);
-                        msc.setVisible(true);
-                        this.dispose();
-                        break;
+                if (reg) {
+                    AddAdmission aa = new AddAdmission();
+                }else{
+                    switch (auth) {
+                        case 0: {
+                            MainScreenGUI2 msc = new MainScreenGUI2(username, 3);
+                            msc.setVisible(true);
+                            this.dispose();
+                            break;
+                        }
+                        case 1: {
+                            MainScreenGUI3 msc = new MainScreenGUI3(username, 4);
+                            msc.setVisible(true);
+                            this.dispose();
+                            break;
+                        }
+                        default: {
+                            MainScreenGUI msc = new MainScreenGUI(username, 1);
+                            msc.setVisible(true);
+                            this.dispose();
+                            break;
+                        }
                     }
                 }
 
